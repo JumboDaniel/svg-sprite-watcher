@@ -17,7 +17,10 @@ export interface SpriteConfig {
         astro?: string;
         vue?: string;
       };
-  svgSpriteConfig?: Partial<Config>;
+  // We omit "dest" because we handle the output directory manually.
+  // We can't use Omit for nested keys like shape.id cleanly without complex utility types,
+  // so we just let them provide Partial<Config> and we intentionally override their shape.id.generator
+  svgSpriteConfig?: Partial<Omit<Config, "dest">>;
   ignore?: string[];
 }
 
@@ -61,7 +64,6 @@ export async function loadConfig(
     const importedConfig = (await jiti.import(resolvedPath)) as any;
     const userConfig = importedConfig.default || importedConfig;
 
-    // Apply defaults and env overlaps
     const finalConfig = {
       ...DEFAULT_CONFIG,
       ...userConfig,

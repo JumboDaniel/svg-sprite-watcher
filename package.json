@@ -4,7 +4,7 @@
   "description": "TypeScript-first SVG sprite generator with framework integrations",
   "type": "module",
   "bin": {
-    "svg-sprite": "./dist/cli.mjs"
+    "svg-sprite-generate": "./dist/cli.mjs"
   },
   "exports": {
     ".": {
