@@ -11,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "svg-sprite-generator": "file:..\\svg-sprite-generator-0.0.1.tgz"
+    "svg-sprite-generator": "workspace:*"
   }
 }
