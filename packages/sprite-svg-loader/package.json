@@ -13,13 +13,19 @@
       "require": "./dist/index.cjs"
     },
     "./astro": {
-      "types": "./dist/astro.d.ts",
-      "import": "./dist/astro.mjs"
+      "types": "./dist/codegen/astro.d.ts",
+      "import": "./dist/codegen/astro.mjs",
+      "require": "./dist/codegen/astro.cjs"
     },
-    "./nextjs": {
-      "types": "./dist/nextjs.d.ts",
-      "import": "./dist/nextjs.mjs",
-      "require": "./dist/nextjs.cjs"
+    "./react": {
+      "types": "./dist/codegen/react.d.ts",
+      "import": "./dist/codegen/react.mjs",
+      "require": "./dist/codegen/react.cjs"
+    },
+    "./vue": {
+      "types": "./dist/codegen/vue.d.ts",
+      "import": "./dist/codegen/vue.mjs",
+      "require": "./dist/codegen/vue.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.ts",
@@ -34,7 +40,8 @@
     "chokidar": "^3.5.3",
     "commander": "^14.0.3",
     "glob": "^10.3.10",
-    "inquirer": "^13.2.5",
+    "jiti": "^2.6.1",
+    "prompts": "^2.4.2",
     "svg-sprite": "^2.0.4"
   },
   "peerDependencies": {
@@ -47,10 +54,10 @@
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
+    "@types/prompts": "^2.4.9",
     "@types/svg-sprite": "^0.0.39",
     "@types/vinyl": "^2.0.12",
     "dotenv": "^17.3.1",
-    "jiti": "^2.6.1",
     "typescript": "^5.0.0",
     "unbuild": "^2.0.0"
   },

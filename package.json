@@ -6,6 +6,10 @@
   },
   "packageManager": "pnpm@8.0.0",
   "scripts": {
-    "build": "pnpm --filter svg-sprite-generator build"
+    "build": "pnpm --filter svg-sprite-generator build",
+    "lint": "oxlint"
+  },
+  "devDependencies": {
+    "oxlint": "^1.50.0"
   }
 }

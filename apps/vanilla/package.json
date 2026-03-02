@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./node_modules/svg-sprite-generate/dist/cli.mjs",
-    "init": "node ./node_modules/svg-sprite-generate/dist/cli.mjs init"
+    "dev": "node ./node_modules/svg-sprite-generator/dist/cli.mjs",
+    "init": "node ./node_modules/svg-sprite-generator/dist/cli.mjs init"
   },
   "keywords": [],
   "author": "",

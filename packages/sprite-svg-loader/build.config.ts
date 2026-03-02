@@ -1,7 +1,15 @@
 import { defineBuildConfig } from "unbuild";
 
 export default defineBuildConfig({
-  entries: ["index", "cli", "astro", "nextjs", "vite"],
+  entries: [
+    "index",
+    "cli",
+    "vite",
+    "codegen/astro",
+    "codegen/react",
+    "codegen/vue",
+    "codegen/types",
+  ],
   clean: true,
   declaration: true,
   rollup: {

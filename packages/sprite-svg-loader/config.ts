@@ -40,21 +40,20 @@ export async function loadConfig(
   // Resolve path
   let resolvedPath = configPath
     ? path.resolve(root, configPath)
-    : path.resolve(root, "sprite.config.js");
+    : path.resolve(root, "sprite-config.js");
 
-  // Check if file exists when explicitly provided
   if (configPath && !fs.existsSync(resolvedPath)) {
     logger.error(`Config file not found at ${resolvedPath}`);
     return null;
   }
 
   if (!configPath && !fs.existsSync(resolvedPath)) {
-    const tsPath = path.resolve(root, "sprite.config.ts");
+    const tsPath = path.resolve(root, "sprite-config.ts");
     if (fs.existsSync(tsPath)) {
       resolvedPath = tsPath;
     } else {
       logger.error(
-        "No sprite.config.js or sprite.config.ts found. Run `npx svg-sprite init` first.",
+        "No sprite-config.js or sprite-config.ts found. Run `npx svg-sprite-generate init` first.",
       );
       return null;
     }
