@@ -37,7 +37,6 @@ export async function loadConfig(
   const root = process.cwd();
   const jiti = createJiti(import.meta.url);
 
-  // Resolve path
   let resolvedPath = configPath
     ? path.resolve(root, configPath)
     : path.resolve(root, "sprite-config.js");

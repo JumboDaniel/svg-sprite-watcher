@@ -22,7 +22,7 @@ program
   .option("-c, --config <path>", "Use custom config file")
   .action(async (options) => {
     const config = await loadConfig(options.config);
-    if (!config) return; // Error handled in loadConfig
+    if (!config) return;
 
     if (options.watch) {
       await runCoreGenerator(config);
