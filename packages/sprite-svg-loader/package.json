@@ -14,7 +14,7 @@
     },
     "./components/react": {
       "types": "./dist/components/react.d.ts",
-      "import": "./dist/components/react.js"
+      "import": "./dist/components/react.mjs"
     },
     "./components/astro": {
       "import": "./dist/components/astro.astro"
