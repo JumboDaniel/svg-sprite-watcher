@@ -10,7 +10,7 @@ export function watch(config: SpriteConfig, onChange: () => void) {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(async () => {
       onChange();
-    }, 100); // 100ms debounce
+    }, 100);
   };
 
   const inputs = Array.isArray(config.input) ? config.input : [config.input];

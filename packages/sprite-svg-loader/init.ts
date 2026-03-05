@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import prompts from "prompts";
 import fs from "fs";
 import path from "path";
@@ -19,19 +20,22 @@ export async function initCommand() {
     },
     {
       type: "confirm",
-      name: "generateComponents",
-      message: "Generate components?",
+      name: "generateTypes",
+      message: "Do you want to generate TypeScript types (sprite.d.ts)?",
       initial: true,
     },
     {
-      type: (prev) => (prev ? "multiselect" : null),
-      name: "components",
-      message: "Which frameworks?",
-      choices: [
-        { title: "React", value: "react" },
-        { title: "Astro", value: "astro" },
-        { title: "Vue", value: "vue" },
-      ],
+      type: (prev) => (prev ? "text" : null),
+      name: "typesOutput",
+      message: "Where should the TypeScript declarations be output?",
+      initial: "src/sprite.d.ts",
+    },
+    {
+      type: "text",
+      name: "spriteUrl",
+      message:
+        "What is the public URL path to your sprite? (Optional, press enter to auto-detect)",
+      initial: "",
     },
   ]);
 
@@ -40,15 +44,19 @@ export async function initCommand() {
     return;
   }
 
-  const configContent = `export default {
+  const configContent = `/** @type {import('svg-sprite-watcher').SpriteConfig} */
+export default {
   input: "${responses.input}",
   output: "${responses.output}",
-${responses.components?.length ? `  components: ${JSON.stringify(responses.components)},` : ""}
+${responses.spriteUrl ? `  spriteUrl: "${responses.spriteUrl}",\n` : ""}\
+${responses.generateTypes === false ? `  generateTypes: false,\n` : ""}\
+${responses.typesOutput && responses.typesOutput !== "src/sprite.d.ts" ? `  typesOutput: "${responses.typesOutput}",\n` : ""}\
 }
 `;
 
+  // Use mjs by default for better ESM support in projects that don't specify type: module
   const configPath = path.resolve(process.cwd(), "sprite-config.js");
   fs.writeFileSync(configPath, configContent, "utf-8");
-  logger.success("Created sprite-config.js");
-  logger.info("Run 'npx svg-sprite-generate' to generate your sprite");
+  logger.success("Created sprite-config.js with JSDoc types!");
+  logger.info("Run 'pnpm svg-sprite-watcher init' to generate your sprite");
 }

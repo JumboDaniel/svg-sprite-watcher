@@ -1,10 +1,10 @@
 {
-  "name": "svg-sprite-generator",
+  "name": "svg-sprite-watcher",
   "version": "0.0.1",
   "description": "TypeScript-first SVG sprite generator with framework integrations",
   "type": "module",
   "bin": {
-    "svg-sprite-generate": "./dist/cli.mjs"
+    "svg-sprite-watcher": "./dist/cli.mjs"
   },
   "exports": {
     ".": {
@@ -12,20 +12,17 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./astro": {
-      "types": "./dist/codegen/astro.d.ts",
-      "import": "./dist/codegen/astro.mjs",
-      "require": "./dist/codegen/astro.cjs"
+    "./components/react": {
+      "types": "./dist/components/react.d.ts",
+      "import": "./dist/components/react.js"
     },
-    "./react": {
-      "types": "./dist/codegen/react.d.ts",
-      "import": "./dist/codegen/react.mjs",
-      "require": "./dist/codegen/react.cjs"
+    "./components/astro": {
+      "import": "./dist/components/astro.astro"
     },
-    "./vue": {
-      "types": "./dist/codegen/vue.d.ts",
-      "import": "./dist/codegen/vue.mjs",
-      "require": "./dist/codegen/vue.cjs"
+    "./types": {
+      "types": "./dist/codegen/types.d.ts",
+      "import": "./dist/codegen/types.mjs",
+      "require": "./dist/codegen/types.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.ts",
@@ -55,9 +52,11 @@
   "devDependencies": {
     "@types/node": "^18.0.0",
     "@types/prompts": "^2.4.9",
+    "@types/react": "^19.2.14",
     "@types/svg-sprite": "^0.0.39",
     "@types/vinyl": "^2.0.12",
     "dotenv": "^17.3.1",
+    "react": "^19.2.4",
     "typescript": "^5.0.0",
     "unbuild": "^2.0.0"
   },

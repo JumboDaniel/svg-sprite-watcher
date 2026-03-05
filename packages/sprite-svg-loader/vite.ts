@@ -10,7 +10,7 @@ export default function vitePluginSvgSprite() {
       // Spawn watcher during dev
       const cliPath = path.resolve(
         process.cwd(),
-        "node_modules/.bin/svg-sprite",
+        "node_modules/.bin/svg-sprite-generate",
       );
       child = spawn(cliPath, ["--watch"], {
         stdio: "inherit",
@@ -29,7 +29,7 @@ export default function vitePluginSvgSprite() {
       if (!child) {
         const cliPath = path.resolve(
           process.cwd(),
-          "node_modules/.bin/svg-sprite",
+          "node_modules/.bin/svg-sprite-generate",
         );
         spawn(cliPath, [], {
           stdio: "inherit",

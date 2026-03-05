@@ -17,9 +17,6 @@ export interface SpriteConfig {
         astro?: string;
         vue?: string;
       };
-  // We omit "dest" because we handle the output directory manually.
-  // We can't use Omit for nested keys like shape.id cleanly without complex utility types,
-  // so we just let them provide Partial<Config> and we intentionally override their shape.id.generator
   svgSpriteConfig?: Partial<Omit<Config, "dest">>;
   ignore?: string[];
 }
@@ -28,7 +25,7 @@ const DEFAULT_CONFIG: Partial<SpriteConfig> = {
   input: "src/icons",
   output: "public/sprite.svg",
   generateTypes: true,
-  typesOutput: "src/sprite.gen.ts",
+  typesOutput: "src/sprite.d.ts",
 };
 
 export async function loadConfig(
@@ -52,7 +49,7 @@ export async function loadConfig(
       resolvedPath = tsPath;
     } else {
       logger.error(
-        "No sprite-config.js or sprite-config.ts found. Run `npx svg-sprite-generate init` first.",
+        "No sprite-config.js or sprite-config.ts found. Run `pnpm svg-sprite-watcher init` first.",
       );
       return null;
     }

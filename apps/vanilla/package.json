@@ -11,6 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "svg-sprite-generator": "workspace:*"
+    "svg-sprite-watcher": "workspace:*"
   }
 }
