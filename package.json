@@ -6,13 +6,16 @@
   },
   "packageManager": "pnpm@8.0.0",
   "scripts": {
-    "build": "pnpm --filter svg-sprite-generator build",
+    "build": "pnpm --filter svg-sprite-watcher build",
     "dev:react": "pnpm --filter react dev",
     "dev:vanilla": "pnpm --filter vanilla dev",
     "dev:astro": "pnpm --filter astro dev",
     "dev:next": "pnpm --filter next-js dev",
     "dev:all": "concurrently \"pnpm run dev:react\" \"pnpm run dev:vanilla\" \"pnpm run dev:astro\" \"pnpm run dev:next\"",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "test:svg-sprite-watcher": "pnpm --filter svg-sprite-watcher test",
+    "test:svg-sprite-watcher:run": "pnpm --filter svg-sprite-watcher test"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
