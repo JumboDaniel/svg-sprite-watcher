@@ -73,7 +73,7 @@ declare module "svg-sprite-watcher/components/astro" {
           process.cwd(),
           "node_modules/.bin/svg-sprite-watcher",
         );
-        child = spawn(cliPath, ["--watch"], {
+        child = spawn(cliPath, ["--watch", "--no-types"], {
           stdio: "inherit",
           shell: true,
         });
@@ -87,7 +87,7 @@ declare module "svg-sprite-watcher/components/astro" {
             process.cwd(),
             "node_modules/.bin/svg-sprite-watcher",
           );
-          spawn(cliPath, [], {
+          spawn(cliPath, ["--no-types"], {
             stdio: "inherit",
             shell: true,
           });

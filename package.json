@@ -7,13 +7,13 @@
   "packageManager": "pnpm@8.0.0",
   "scripts": {
     "build": "pnpm --filter svg-sprite-generator build",
-    "dev:app1": "npm run dev -w @your-scope/app1",
-    "dev:app2": "npm run dev -w @your-scope/app2",
-    "dev:all": "concurrently \"npm run dev:app1\" \"npm run dev:app2\"",
-    "dev:parallel": "pnpm ",
+    "dev:react": "pnpm --filter react dev",
+    "dev:vanilla": "pnpm --filter mock-user-project dev",
+    "dev:all": "concurrently \"pnpm run dev:react\" \"pnpm run dev:vanilla\"",
     "lint": "oxlint"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "oxlint": "^1.50.0"
   }
 }
