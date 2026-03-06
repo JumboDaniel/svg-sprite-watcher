@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "svg-sprite-watcher --watch --run vite",
+    "dev": "vite",
     "sprite:watch": "svg-sprite-watcher --watch",
     "build": "tsc -b && vite build",
     "lint": "eslint .",

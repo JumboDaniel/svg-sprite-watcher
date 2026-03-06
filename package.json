@@ -8,8 +8,10 @@
   "scripts": {
     "build": "pnpm --filter svg-sprite-generator build",
     "dev:react": "pnpm --filter react dev",
-    "dev:vanilla": "pnpm --filter mock-user-project dev",
-    "dev:all": "concurrently \"pnpm run dev:react\" \"pnpm run dev:vanilla\"",
+    "dev:vanilla": "pnpm --filter vanilla dev",
+    "dev:astro": "pnpm --filter astro dev",
+    "dev:next": "pnpm --filter next-js dev",
+    "dev:all": "concurrently \"pnpm run dev:react\" \"pnpm run dev:vanilla\" \"pnpm run dev:astro\" \"pnpm run dev:next\"",
     "lint": "oxlint"
   },
   "devDependencies": {

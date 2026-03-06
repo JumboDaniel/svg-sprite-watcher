@@ -1,7 +1,7 @@
 {
   "name": "svg-sprite-watcher",
   "version": "0.0.1",
-  "description": "TypeScript-first SVG sprite generator with framework integrations",
+  "description": "TypeScript-first SVG sprite generator and watcher with framework integrations",
   "type": "module",
   "bin": {
     "svg-sprite-watcher": "./dist/cli.mjs"

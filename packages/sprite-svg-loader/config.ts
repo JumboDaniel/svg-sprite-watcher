@@ -1,4 +1,5 @@
 import { createJiti } from "jiti";
+import { pathToFileURL } from "url";
 import path from "path";
 import fs from "fs";
 import { logger } from "./logger";
@@ -37,9 +38,9 @@ export async function loadConfig(
       return null;
     }
   }
-
   try {
-    const importedConfig = (await jiti.import(resolvedPath)) as any;
+    const fileUrl = pathToFileURL(resolvedPath).href;
+    const importedConfig = (await jiti.import(fileUrl)) as any;
     const userConfig = importedConfig.default || importedConfig;
 
     const finalConfig = {
