@@ -31,11 +31,11 @@ export function translateConfig(
     ...config.svgSpriteConfig,
     mode: {
       ...baseConfig.mode,
-      ...(config.svgSpriteConfig?.mode || {}),
+      ...config.svgSpriteConfig?.mode,
     },
     shape: {
       ...baseConfig.shape,
-      ...(config.svgSpriteConfig?.shape || {}),
+      ...config.svgSpriteConfig?.shape,
     },
   };
 }
