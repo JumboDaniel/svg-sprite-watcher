@@ -1,6 +1,6 @@
 import { glob } from "glob";
 import fs from "fs";
-import { SpriteConfig } from "./config";
+import { SpriteConfig } from "./types/config";
 import { logger } from "./logger";
 import { resolvePath } from "./utils/paths";
 

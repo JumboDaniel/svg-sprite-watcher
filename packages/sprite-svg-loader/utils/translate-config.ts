@@ -1,7 +1,7 @@
 import { Config } from "svg-sprite";
 import path from "path";
 import File from "vinyl";
-import { SpriteConfig } from "../config";
+import { SpriteConfig } from "../types/config";
 
 export function translateConfig(
   config: SpriteConfig,

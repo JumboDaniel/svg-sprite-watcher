@@ -22,10 +22,6 @@ export default function vitePluginSvgSprite() {
       });
     },
     buildStart() {
-      // Vite handles watch vs build context inherently.
-      // If we are in build (not dev server), run generator once.
-      // Checking process.env.NODE_ENV is a common proxy for this in Vite plugins,
-      // but to be safe, we only run the one-off build if 'child' hasn't been spawned by configureServer
       if (!child) {
         const cliPath = path.resolve(
           process.cwd(),

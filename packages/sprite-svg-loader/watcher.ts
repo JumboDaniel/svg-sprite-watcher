@@ -1,5 +1,5 @@
 import chokidar from "chokidar";
-import { SpriteConfig } from "./config";
+import { SpriteConfig } from "./types/config";
 import { logger } from "./logger";
 import { resolvePath } from "./utils/paths";
 

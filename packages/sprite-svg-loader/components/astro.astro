@@ -1,0 +1,29 @@
+---
+import type { IconName } from "../index";
+
+export interface Props extends astroHTML.JSX.SVGAttributes {
+  name: IconName;
+  size?: number | string;
+  color?: string;
+  title?: string;
+  spriteUrl?: string;
+}
+
+const {
+  name,
+  size = 16,
+  color,
+  title,
+  spriteUrl = "/sprite.svg",
+  style,
+  ...props
+} = Astro.props;
+
+// Filter out styling props into an inline object
+const inlineStyle = color ? { color, ...style } : style;
+---
+
+<svg width={size} height={size} style={inlineStyle} {...props}>
+  {title && <title>{title}</title>}
+  <use href={`${spriteUrl}#${name}`}></use>
+</svg>

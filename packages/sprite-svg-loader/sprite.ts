@@ -1,7 +1,7 @@
 import SVGSpriter from "svg-sprite";
 import fs from "fs";
 import path from "path";
-import { SpriteConfig } from "./config";
+import { SpriteConfig } from "./types/config";
 import { logger } from "./logger";
 import { ensureDir, resolvePath } from "./utils/paths";
 import { translateConfig } from "./utils/translate-config";

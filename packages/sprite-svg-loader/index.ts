@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { SpriteConfig } from "./config";
+import { SpriteConfig } from "./types/config";
 import { logger } from "./logger";
 import { scanIcons } from "./scanner";
 import { generateSprite } from "./sprite";

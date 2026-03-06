@@ -4,8 +4,10 @@ export default defineBuildConfig({
   entries: [
     "index",
     "cli",
-    "vite",
+    "plugins/vite",
+    "plugins/astro",
     "codegen/types",
+    "types/config",
     {
       builder: "mkdist",
       input: "./components/",

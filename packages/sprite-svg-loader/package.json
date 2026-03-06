@@ -24,9 +24,18 @@
       "import": "./dist/codegen/types.mjs",
       "require": "./dist/codegen/types.cjs"
     },
-    "./vite": {
-      "types": "./dist/vite.d.ts",
-      "import": "./dist/vite.mjs"
+    "./types/config": {
+      "types": "./dist/types/config.d.ts",
+      "import": "./dist/types/config.mjs",
+      "require": "./dist/types/config.cjs"
+    },
+    "./plugins/vite": {
+      "types": "./dist/plugins/vite.d.ts",
+      "import": "./dist/plugins/vite.mjs"
+    },
+    "./plugins/astro": {
+      "types": "./dist/plugins/astro.d.ts",
+      "import": "./dist/plugins/astro.mjs"
     }
   },
   "scripts": {

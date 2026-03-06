@@ -2,24 +2,7 @@ import { createJiti } from "jiti";
 import path from "path";
 import fs from "fs";
 import { logger } from "./logger";
-import { Config } from "svg-sprite";
-
-export interface SpriteConfig {
-  input: string | string[];
-  output: string;
-  spriteUrl?: string;
-  generateTypes?: boolean;
-  typesOutput?: string;
-  components?:
-    | string[]
-    | {
-        react?: string;
-        astro?: string;
-        vue?: string;
-      };
-  svgSpriteConfig?: Partial<Omit<Config, "dest">>;
-  ignore?: string[];
-}
+import { SpriteConfig } from "./types/config";
 
 const DEFAULT_CONFIG: Partial<SpriteConfig> = {
   input: "src/icons",

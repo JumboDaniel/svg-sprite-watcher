@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { SpriteConfig } from "../config";
+import { SpriteConfig } from "../types/config";
 import { logger } from "../logger";
 import { resolvePath } from "../utils/paths";
 
