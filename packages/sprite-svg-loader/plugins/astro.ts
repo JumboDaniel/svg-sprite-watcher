@@ -1,16 +1,28 @@
-import { spawn } from "child_process";
+import { spawn, type ChildProcess } from "child_process";
 import path from "path";
 import fs from "fs";
 import { loadConfig } from "../config";
 import { resolvePath } from "../utils/paths";
 
+type AstroSetupContext = {
+  injectTypes?: (args: { filename: string; content: string }) => void;
+};
+
+function isAstroSetupContext(value: unknown): value is AstroSetupContext {
+  return typeof value === "object" && value !== null;
+}
+
 export default function astroPluginSvgSprite() {
-  let child: any = null;
+  let child: ChildProcess | null = null;
 
   return {
     name: "astro-plugin-svg-sprite",
     hooks: {
-      "astro:config:setup": async ({ command, injectTypes }: any) => {
+      "astro:config:setup": async (setupContext: unknown) => {
+        const injectTypes = isAstroSetupContext(setupContext)
+          ? setupContext.injectTypes
+          : undefined;
+
         if (injectTypes) {
           const config = await loadConfig();
           if (config) {

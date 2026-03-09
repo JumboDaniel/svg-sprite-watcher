@@ -1,12 +1,24 @@
-import { spawn } from "child_process";
+import { spawn, type ChildProcess } from "child_process";
 import path from "path";
 
+type ClosableServer = {
+  on(event: "close", cb: () => void): void;
+};
+
+type ViteServer = {
+  httpServer?: ClosableServer;
+};
+
+function isViteServer(server: unknown): server is ViteServer {
+  return typeof server === "object" && server !== null;
+}
+
 export default function vitePluginSvgSprite() {
-  let child: any = null;
+  let child: ChildProcess | null = null;
 
   return {
     name: "vite-plugin-svg-sprite",
-    configureServer(server: any) {
+    configureServer(server: unknown) {
       // Spawn watcher during dev
       const cliPath = path.resolve(
         process.cwd(),
@@ -17,9 +29,11 @@ export default function vitePluginSvgSprite() {
         shell: true,
       });
 
-      server.httpServer?.on("close", () => {
-        if (child) child.kill();
-      });
+      if (isViteServer(server)) {
+        server.httpServer?.on("close", () => {
+          if (child) child.kill();
+        });
+      }
     },
     buildStart() {
       if (!child) {

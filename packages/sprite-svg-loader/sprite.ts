@@ -5,6 +5,10 @@ import { SpriteConfig } from "./types/config";
 import { logger } from "./logger";
 import { ensureDir, resolvePath } from "./utils/paths";
 import { translateConfig } from "./utils/translate-config";
+import { getErrorMessage } from "./utils/getErrorMessage";
+
+type SpriterChunk = { contents: string | Buffer };
+type SpriterResult = Record<string, Record<string, SpriterChunk>>;
 
 export async function generateSprite(config: SpriteConfig, files: string[]) {
   const outputPath = resolvePath(config.output);
@@ -28,31 +32,36 @@ export async function generateSprite(config: SpriteConfig, files: string[]) {
       }
 
       spriter.add(file, null, content);
-    } catch (err: any) {
+    } catch (err: unknown) {
       logger.warn(
-        `Failed to read or add ${path.basename(file)}: ${err.message}`,
+        `Failed to read or add ${path.basename(file)}: ${getErrorMessage(err)}`,
       );
     }
   }
 
   return new Promise<void>((resolve, reject) => {
-    spriter.compile((error: any, result: any, data: any) => {
+    spriter.compile((error: unknown, result: unknown) => {
       if (error) {
-        return reject(error);
+        reject(error instanceof Error ? error : new Error(getErrorMessage(error)));
+        return;
       }
 
-      for (const mode in result) {
-        for (const resource in result[mode]) {
-          const chunk = result[mode][resource];
+      const compileResult = result as SpriterResult;
+
+      for (const mode of Object.keys(compileResult)) {
+        for (const resource of Object.keys(compileResult[mode])) {
+          const chunk = compileResult[mode][resource];
           try {
             fs.writeFileSync(outputPath, chunk.contents);
             logger.success(`Generated ${config.output}`);
             resolve();
-          } catch (err: any) {
+            return;
+          } catch {
             logger.error(
               `Cannot write to "${config.output}"\n  Check folder permissions or update output path`,
             );
             reject(new Error("Write permission denied"));
+            return;
           }
         }
       }

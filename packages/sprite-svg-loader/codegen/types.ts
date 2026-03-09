@@ -3,6 +3,7 @@ import path from "path";
 import { logger } from "../logger";
 import { resolvePath } from "../utils/paths";
 import { SpriteConfig } from "../types/config";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 /**
  * Generate global types and runtime variables for the sprite
@@ -40,7 +41,7 @@ ${iconNames.length > 0 ? iconNames.map((name) => `    | "${name}"`).join("\n") :
 
     fs.writeFileSync(typesPath, dtsOutput, "utf-8");
     logger.success(`Generated definitions ${path.basename(typesPath)}`);
-  } catch (err: any) {
-    logger.error(`Failed to generate types: ${err.message}`);
+  } catch (err: unknown) {
+    logger.error(`Failed to generate types: ${getErrorMessage(err)}`);
   }
 }

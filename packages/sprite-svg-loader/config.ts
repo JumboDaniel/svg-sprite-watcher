@@ -4,6 +4,7 @@ import path from "path";
 import fs from "fs";
 import { logger } from "./logger";
 import { SpriteConfig } from "./types/config";
+import { getErrorMessage } from "./utils/getErrorMessage";
 
 const DEFAULT_CONFIG: Partial<SpriteConfig> = {
   input: "src/icons",
@@ -11,6 +12,18 @@ const DEFAULT_CONFIG: Partial<SpriteConfig> = {
   generateTypes: true,
   typesOutput: "src/sprite.d.ts",
 };
+
+type LooseConfig = Partial<SpriteConfig> & {
+  default?: Partial<SpriteConfig>;
+};
+
+function toConfigModule(value: unknown): LooseConfig {
+  if (typeof value === "object" && value !== null) {
+    return value as LooseConfig;
+  }
+
+  return {};
+}
 
 export async function loadConfig(
   configPath?: string,
@@ -40,7 +53,7 @@ export async function loadConfig(
   }
   try {
     const fileUrl = pathToFileURL(resolvedPath).href;
-    const importedConfig = (await jiti.import(fileUrl)) as any;
+    const importedConfig = toConfigModule(await jiti.import(fileUrl));
     const userConfig = importedConfig.default || importedConfig;
 
     const finalConfig = {
@@ -54,13 +67,13 @@ export async function loadConfig(
 
     if (!finalConfig.spriteUrl) {
       // Best guess for public sprite: "/sprite.svg" instead of "public/sprite.svg"
-      const basename = path.basename(finalConfig.output);
+      const basename = path.basename(finalConfig.output as string);
       finalConfig.spriteUrl = `/${basename}`;
     }
 
     return finalConfig as SpriteConfig;
-  } catch (error: any) {
-    logger.error(`Failed to load config file: ${error.message}`);
+  } catch (error: unknown) {
+    logger.error(`Failed to load config file: ${getErrorMessage(error)}`);
     return null;
   }
 }

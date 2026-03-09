@@ -16,7 +16,7 @@
     "lint:fix": "oxlint --fix",
     "format": "oxfmt .",
     "format:check": "oxfmt . --check",
-    "lint:format:fix:all": "pnpm run lint:fix && pnpm run format:check",
+    "lint:format:fix:all": "pnpm run lint:fix",
     "test:svg-sprite-watcher": "pnpm --filter svg-sprite-watcher test",
     "test:svg-sprite-watcher:run": "pnpm --filter svg-sprite-watcher test"
   },

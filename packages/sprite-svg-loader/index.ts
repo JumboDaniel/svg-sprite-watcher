@@ -5,6 +5,7 @@ import { logger } from "./logger";
 import { scanIcons } from "./scanner";
 import { generateSprite } from "./sprite";
 import { generateTypes } from "./codegen/types";
+import { getErrorMessage } from "./utils/getErrorMessage";
 
 export type IconName = string;
 
@@ -28,8 +29,8 @@ export async function runCoreGenerator(config: SpriteConfig) {
     if (config.generateTypes !== false) {
       await generateTypes(config);
     }
-  } catch (error: any) {
-    logger.error(error.message);
+  } catch (error: unknown) {
+    logger.error(getErrorMessage(error));
     process.exit(1);
   }
 }
