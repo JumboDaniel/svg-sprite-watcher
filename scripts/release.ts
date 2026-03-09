@@ -20,6 +20,54 @@ function $(cmd: string, options?: { quiet?: boolean }): void {
   }
 }
 
+function getGitStatusPorcelain() {
+  return execSync("git status --porcelain", { encoding: "utf-8" }).trim();
+}
+
+function assertCleanWorkingTree() {
+  const gitStatus = getGitStatusPorcelain();
+  if (gitStatus.length > 0) {
+    console.error(
+      "Working tree is not clean. Commit or stash local changes before releasing.",
+    );
+    process.exit(1);
+  }
+}
+
+function commitVersionBump(
+  pkgJsonPath: string,
+  packageName: string,
+  version: string,
+) {
+  const normalizedPath = pkgJsonPath.replace(/\\/g, "/");
+  $(`git add -- "${normalizedPath}"`);
+  $(`git commit -m "chore(${packageName}): version bump to ${version}"`);
+}
+
+function isLoggedIntoNpm() {
+  try {
+    $("pnpm whoami", { quiet: true });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function ensureNpmLogin() {
+  if (isLoggedIntoNpm()) {
+    console.info("npm auth check passed (pnpm whoami)");
+    return;
+  }
+
+  console.info("Not logged in to npm. Starting pnpm login...");
+  $("pnpm login");
+
+  if (!isLoggedIntoNpm()) {
+    console.error("npm authentication failed after login attempt.");
+    process.exit(1);
+  }
+}
+
 async function doesTagAlreadyExist(tag: string) {
   try {
     $(`gh api -X GET /repos/{owner}/{repo}/git/ref/tags/${tag}`, {
@@ -113,6 +161,7 @@ function discoverPackages(root: string) {
 
 async function run() {
   const root = process.cwd();
+  assertCleanWorkingTree();
 
   // 0. Discover packages and prompt for selection
   const packages = discoverPackages(root);
@@ -160,10 +209,7 @@ async function run() {
 
     pkg.version = nextVersion;
     writeFileSync(pkgJsonPath, JSON.stringify(pkg, null, 2) + "\n", "utf-8");
-
-    $(
-      `git commit -a -m "chore(${packageName}): version bump to ${nextVersion}"`,
-    );
+    commitVersionBump(pkgJsonPath, packageName, nextVersion);
   }
 
   const { version, tag } = getVersionAndTag(pkg.version);
@@ -192,11 +238,12 @@ async function run() {
   lint(packageName);
   runTests(packageName);
   build(packageName);
+  ensureNpmLogin();
   tagAndPush(packageName, version);
   publishToNpm(packageName, tag);
   createRelease(packageName, version, isPreRelease);
 
-  console.log(`\n✅ Release ${gitTag} successfully completed!`);
+  console.log(`\n? Release ${gitTag} successfully completed!`);
 }
 
 run().catch((err) => {
