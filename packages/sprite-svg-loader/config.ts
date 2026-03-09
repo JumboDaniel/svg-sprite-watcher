@@ -1,35 +1,29 @@
 import { createJiti } from "jiti";
+import { pathToFileURL } from "url";
 import path from "path";
 import fs from "fs";
 import { logger } from "./logger";
-import { Config } from "svg-sprite";
-
-export interface SpriteConfig {
-  input: string | string[];
-  output: string;
-  spriteUrl?: string;
-  generateTypes?: boolean;
-  typesOutput?: string;
-  components?:
-    | string[]
-    | {
-        react?: string;
-        astro?: string;
-        vue?: string;
-      };
-  // We omit "dest" because we handle the output directory manually.
-  // We can't use Omit for nested keys like shape.id cleanly without complex utility types,
-  // so we just let them provide Partial<Config> and we intentionally override their shape.id.generator
-  svgSpriteConfig?: Partial<Omit<Config, "dest">>;
-  ignore?: string[];
-}
+import { SpriteConfig } from "./types/config";
+import { getErrorMessage } from "./utils/getErrorMessage";
 
 const DEFAULT_CONFIG: Partial<SpriteConfig> = {
   input: "src/icons",
   output: "public/sprite.svg",
   generateTypes: true,
-  typesOutput: "src/sprite.gen.ts",
+  typesOutput: "src/sprite.d.ts",
 };
+
+type LooseConfig = Partial<SpriteConfig> & {
+  default?: Partial<SpriteConfig>;
+};
+
+function toConfigModule(value: unknown): LooseConfig {
+  if (typeof value === "object" && value !== null) {
+    return value as LooseConfig;
+  }
+
+  return {};
+}
 
 export async function loadConfig(
   configPath?: string,
@@ -37,7 +31,6 @@ export async function loadConfig(
   const root = process.cwd();
   const jiti = createJiti(import.meta.url);
 
-  // Resolve path
   let resolvedPath = configPath
     ? path.resolve(root, configPath)
     : path.resolve(root, "sprite-config.js");
@@ -53,14 +46,14 @@ export async function loadConfig(
       resolvedPath = tsPath;
     } else {
       logger.error(
-        "No sprite-config.js or sprite-config.ts found. Run `npx svg-sprite-generate init` first.",
+        "No sprite-config.js or sprite-config.ts found. Run `pnpm svg-sprite-watcher init` first.",
       );
       return null;
     }
   }
-
   try {
-    const importedConfig = (await jiti.import(resolvedPath)) as any;
+    const fileUrl = pathToFileURL(resolvedPath).href;
+    const importedConfig = toConfigModule(await jiti.import(fileUrl));
     const userConfig = importedConfig.default || importedConfig;
 
     const finalConfig = {
@@ -74,13 +67,13 @@ export async function loadConfig(
 
     if (!finalConfig.spriteUrl) {
       // Best guess for public sprite: "/sprite.svg" instead of "public/sprite.svg"
-      const basename = path.basename(finalConfig.output);
+      const basename = path.basename(finalConfig.output as string);
       finalConfig.spriteUrl = `/${basename}`;
     }
 
     return finalConfig as SpriteConfig;
-  } catch (error: any) {
-    logger.error(`Failed to load config file: ${error.message}`);
+  } catch (error: unknown) {
+    logger.error(`Failed to load config file: ${getErrorMessage(error)}`);
     return null;
   }
 }

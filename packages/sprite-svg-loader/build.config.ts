@@ -4,16 +4,25 @@ export default defineBuildConfig({
   entries: [
     "index",
     "cli",
-    "vite",
-    "codegen/astro",
-    "codegen/react",
-    "codegen/vue",
+    "plugins/vite",
+    "plugins/astro",
     "codegen/types",
+    "types/config",
+    {
+      builder: "mkdist",
+      input: "./components/",
+      pattern: ["**/*.tsx", "**/*.ts", "**/*.astro"],
+      outDir: "./dist/components",
+    },
   ],
   clean: true,
   declaration: true,
+  failOnWarn: false,
   rollup: {
-    emitCJS: true, // Next.js often still uses CJS requires in next.config.js
+    emitCJS: true,
     inlineDependencies: true,
+    esbuild: {
+      jsx: "automatic",
+    },
   },
 });

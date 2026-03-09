@@ -1,7 +1,7 @@
 import { Config } from "svg-sprite";
 import path from "path";
 import File from "vinyl";
-import { SpriteConfig } from "../config";
+import { SpriteConfig } from "../types/config";
 
 export function translateConfig(
   config: SpriteConfig,
@@ -31,11 +31,11 @@ export function translateConfig(
     ...config.svgSpriteConfig,
     mode: {
       ...baseConfig.mode,
-      ...(config.svgSpriteConfig?.mode || {}),
+      ...config.svgSpriteConfig?.mode,
     },
     shape: {
       ...baseConfig.shape,
-      ...(config.svgSpriteConfig?.shape || {}),
+      ...config.svgSpriteConfig?.shape,
     },
   };
 }

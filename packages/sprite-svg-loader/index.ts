@@ -1,10 +1,16 @@
-import { SpriteConfig } from "./config";
+#!/usr/bin/env node
+
+import { SpriteConfig } from "./types/config";
 import { logger } from "./logger";
 import { scanIcons } from "./scanner";
 import { generateSprite } from "./sprite";
 import { generateTypes } from "./codegen/types";
-import { generateReactComponent } from "./codegen/react";
-import { generateAstroComponent } from "./codegen/astro";
+import { getErrorMessage } from "./utils/getErrorMessage";
+
+export type IconName = string;
+
+export * from "./utils/iconNames";
+export * from "./utils/isValidIcon";
 
 export async function runCoreGenerator(config: SpriteConfig) {
   try {
@@ -23,17 +29,8 @@ export async function runCoreGenerator(config: SpriteConfig) {
     if (config.generateTypes !== false) {
       await generateTypes(config);
     }
-
-    if (config.components) {
-      const components = Array.isArray(config.components)
-        ? config.components
-        : Object.keys(config.components);
-
-      if (components.includes("react")) await generateReactComponent(config);
-      if (components.includes("astro")) await generateAstroComponent(config);
-    }
-  } catch (error: any) {
-    logger.error(error.message);
+  } catch (error: unknown) {
+    logger.error(getErrorMessage(error));
     process.exit(1);
   }
 }

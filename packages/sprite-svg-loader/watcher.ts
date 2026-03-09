@@ -1,5 +1,5 @@
 import chokidar from "chokidar";
-import { SpriteConfig } from "./config";
+import { SpriteConfig } from "./types/config";
 import { logger } from "./logger";
 import { resolvePath } from "./utils/paths";
 
@@ -10,7 +10,7 @@ export function watch(config: SpriteConfig, onChange: () => void) {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(async () => {
       onChange();
-    }, 100); // 100ms debounce
+    }, 100);
   };
 
   const inputs = Array.isArray(config.input) ? config.input : [config.input];
