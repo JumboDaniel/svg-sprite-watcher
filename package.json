@@ -21,8 +21,10 @@
     "test:svg-sprite-watcher:run": "pnpm --filter svg-sprite-watcher test"
   },
   "devDependencies": {
+    "@types/semver": "^7.7.1",
     "concurrently": "^9.2.1",
     "oxfmt": "^0.36.0",
-    "oxlint": "^1.50.0"
+    "oxlint": "^1.50.0",
+    "semver": "^7.7.4"
   }
 }

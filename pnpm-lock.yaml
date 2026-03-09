@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@types/semver':
+        specifier: ^7.7.1
+        version: 7.7.1
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
@@ -17,6 +20,9 @@ importers:
       oxlint:
         specifier: ^1.50.0
         version: 1.50.0
+      semver:
+        specifier: ^7.7.4
+        version: 7.7.4
 
   apps/astro:
     dependencies:
@@ -1750,6 +1756,9 @@ packages:
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
+
+  '@types/semver@7.7.1':
+    resolution: {integrity: sha512-FmgJfu+MOcQ370SD0ev7EI8TlCAfKYU+B4m5T3yXc1CiRN94g/SZPtsCkk506aUDtlMnFZvasDwHHUcZUEaYuA==}
 
   '@types/svg-sprite@0.0.39':
     resolution: {integrity: sha512-6zpek4v8Ch8iZ9HnXlla8Zqt9bPi9MQZt3IAI6Xqn1Ts3xOUo2nX2qRGu/tfxCeNoQ925PMI+t6z6eiJh/RNzQ==}
@@ -5298,6 +5307,8 @@ snapshots:
       csstype: 3.2.3
 
   '@types/resolve@1.20.2': {}
+
+  '@types/semver@7.7.1': {}
 
   '@types/svg-sprite@0.0.39':
     dependencies:
