@@ -1,6 +1,3 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-
 import { Icon } from "svg-sprite-watcher/components/react";
 
 export default function Home() {

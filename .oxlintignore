@@ -1,0 +1,23 @@
+# Dependencies
+**/node_modules/**
+
+# Build outputs
+**/dist/**
+
+# Astro generated
+**/.astro/**
+
+# Generated sprite files
+**/public/sprite.svg
+
+# TypeScript declaration files
+**/*.d.ts
+
+# Lockfiles
+**/pnpm-lock.yaml
+
+# Config snapshots
+**/.astro/settings.json
+**/.astro/data-store.json
+**/.astro/content-assets.mjs
+**/.astro/content-modules.mjs
