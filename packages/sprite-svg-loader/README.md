@@ -13,19 +13,15 @@ TypeScript-first SVG sprite generator with watch mode, type generation, and fram
 ## Install
 
 ```bash
-pnpm add svg-sprite-watcher
+pnpm i -D svg-sprite-watcher
 ```
 
 ## Quick start
 
 ```bash
-# create sprite-config.ts
+pnpm i -D svg-sprite-watcher
 pnpm svg-sprite-watcher init
-
-# generate sprite once
 pnpm svg-sprite-watcher
-
-# watch mode
 pnpm svg-sprite-watcher --watch
 ```
 
@@ -109,6 +105,35 @@ import svgSpritePlugin from "svg-sprite-watcher/plugins/astro";
 export default defineConfig({
   integrations: [svgSpritePlugin()],
 });
+```
+
+## Framework-agnostic setup (Next.js, Remix, custom SSR, etc.)
+
+If your framework does not use a dedicated plugin, run the sprite CLI in parallel with your dev server and once before build.
+
+1. Add `sprite-config.ts` in your app root.
+2. Output sprite to a public path (for example `public/sprite.svg`).
+3. Run watch mode in dev, and one-shot generation in build.
+
+Example scripts (Next.js):
+
+```json
+{
+  "scripts": {
+    "sprite:watch": "svg-sprite-watcher --watch",
+    "sprite:build": "svg-sprite-watcher",
+    "dev": "concurrently \"pnpm sprite:watch\" \"next dev\"",
+    "build": "pnpm sprite:build && next build"
+  }
+}
+```
+
+Example usage in React/Next components:
+
+```tsx
+import { Icon } from "svg-sprite-watcher/components/react";
+
+<Icon name="home" size={20} spriteUrl="/sprite.svg" />
 ```
 
 ## Internal flow
