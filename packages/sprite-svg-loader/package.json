@@ -1,6 +1,6 @@
 {
   "name": "svg-sprite-watcher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript-first SVG sprite generator and watcher with framework integrations",
   "keywords": [
     "svg",
