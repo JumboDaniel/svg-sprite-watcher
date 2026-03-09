@@ -7,6 +7,7 @@
   "packageManager": "pnpm@8.0.0",
   "scripts": {
     "build": "pnpm --filter svg-sprite-watcher build",
+    "release": "tsx scripts/release.ts",
     "dev:react": "pnpm --filter react dev",
     "dev:vanilla": "pnpm --filter vanilla dev",
     "dev:astro": "pnpm --filter astro dev",
@@ -21,8 +22,15 @@
     "test:svg-sprite-watcher:run": "pnpm --filter svg-sprite-watcher test"
   },
   "devDependencies": {
+    "@types/node": "^25.3.5",
+    "@types/prompts": "^2.4.9",
+    "@types/semver": "^7.7.1",
     "concurrently": "^9.2.1",
     "oxfmt": "^0.36.0",
-    "oxlint": "^1.50.0"
+    "oxlint": "^1.50.0",
+    "prompts": "^2.4.2",
+    "semver": "^7.7.4",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
