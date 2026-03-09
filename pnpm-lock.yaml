@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      '@types/node':
+        specifier: ^25.3.5
+        version: 25.3.5
+      '@types/prompts':
+        specifier: ^2.4.9
+        version: 2.4.9
       '@types/semver':
         specifier: ^7.7.1
         version: 7.7.1
@@ -20,15 +26,21 @@ importers:
       oxlint:
         specifier: ^1.50.0
         version: 1.50.0
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
       semver:
         specifier: ^7.7.4
         version: 7.7.4
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   apps/astro:
     dependencies:
       astro:
         specifier: ^5.17.1
-        version: 5.18.0(@types/node@24.11.0)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)
+        version: 5.18.0(@types/node@25.3.5)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)
       svg-sprite-watcher:
         specifier: workspace:*
         version: link:../../packages/sprite-svg-loader
@@ -1742,6 +1754,9 @@ packages:
 
   '@types/node@24.11.0':
     resolution: {integrity: sha512-fPxQqz4VTgPI/IQ+lj9r0h+fDR66bzoeMGHp8ASee+32OSGIkeASsoZuJixsQoVef1QJbeubcPBxKk22QVoWdw==}
+
+  '@types/node@25.3.5':
+    resolution: {integrity: sha512-oX8xrhvpiyRCQkG1MFchB09f+cXftgIXb3a7UUa4Y3wpmZPw5tyZGTLWhlESOLq1Rq6oDlc8npVU2/9xiCuXMA==}
 
   '@types/prompts@2.4.9':
     resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
@@ -3825,6 +3840,9 @@ packages:
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
+
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
 
@@ -5293,6 +5311,10 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
+  '@types/node@25.3.5':
+    dependencies:
+      undici-types: 7.18.2
+
   '@types/prompts@2.4.9':
     dependencies:
       '@types/node': 24.11.0
@@ -5511,7 +5533,7 @@ snapshots:
 
   assertion-error@2.0.1: {}
 
-  astro@5.18.0(@types/node@24.11.0)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3):
+  astro@5.18.0(@types/node@25.3.5)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3):
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/internal-helpers': 0.7.5
@@ -5568,8 +5590,8 @@ snapshots:
       unist-util-visit: 5.1.0
       unstorage: 1.17.4
       vfile: 6.0.3
-      vite: 6.4.1(@types/node@24.11.0)(jiti@2.6.1)
-      vitefu: 1.1.2(vite@6.4.1(@types/node@24.11.0)(jiti@2.6.1))
+      vite: 6.4.1(@types/node@25.3.5)(jiti@2.6.1)
+      vitefu: 1.1.2(vite@6.4.1(@types/node@25.3.5)(jiti@2.6.1))
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
       yocto-spinner: 0.2.3
@@ -7915,6 +7937,8 @@ snapshots:
 
   undici-types@7.16.0: {}
 
+  undici-types@7.18.2: {}
+
   unified@11.0.5:
     dependencies:
       '@types/unist': 3.0.3
@@ -8033,7 +8057,7 @@ snapshots:
       remove-trailing-separator: 1.1.0
       replace-ext: 1.0.1
 
-  vite@6.4.1(@types/node@24.11.0)(jiti@2.6.1):
+  vite@6.4.1(@types/node@25.3.5)(jiti@2.6.1):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
@@ -8042,7 +8066,7 @@ snapshots:
       rollup: 4.59.0
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 24.11.0
+      '@types/node': 25.3.5
       fsevents: 2.3.3
       jiti: 2.6.1
 
@@ -8072,9 +8096,9 @@ snapshots:
       fsevents: 2.3.3
       jiti: 2.6.1
 
-  vitefu@1.1.2(vite@6.4.1(@types/node@24.11.0)(jiti@2.6.1)):
+  vitefu@1.1.2(vite@6.4.1(@types/node@25.3.5)(jiti@2.6.1)):
     optionalDependencies:
-      vite: 6.4.1(@types/node@24.11.0)(jiti@2.6.1)
+      vite: 6.4.1(@types/node@25.3.5)(jiti@2.6.1)
 
   vitest@4.0.18(@types/node@18.19.130)(jiti@2.6.1):
     dependencies:
